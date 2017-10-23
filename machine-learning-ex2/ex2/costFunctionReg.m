@@ -28,6 +28,11 @@ grad = (1 / m) * sum( X .* repmat((sigmoid(X*theta) - y), 1, size(X,2)) );
 
 grad(:,2:length(grad)) = grad(:,2:length(grad)) + (lambda/m)*theta(2:length(theta))';
 
+%grad(1) = (1/m)*sum((sigmoid(z)-y).*X(:,1));
+
+%for i=2:rows(theta)
+%grad(i) = (1/m)*sum((sigmoid(z)-y).*X(:,i)) + (lambda/m)*theta(i);
+
 
 
 % =============================================================
