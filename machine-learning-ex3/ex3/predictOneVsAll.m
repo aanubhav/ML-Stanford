@@ -35,18 +35,9 @@ z_temp = zeros(num_labels,1);
 z_temp = all_theta * X(i,:)';
 result = zeros(num_labels,1);
 result = sigmoid(z_temp);
-for j=1:length(result)
-if result(j) >= 0.5;
-p(i) = j;
-break;
 
-
-end
-
-
-
-
-end
+[numb pos] = max(result);
+p(i) = pos;
 end
 
 
