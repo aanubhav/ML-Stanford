@@ -39,6 +39,74 @@ Theta2_grad = zeros(size(Theta2));
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
 %
+
+
+
+a1 = [ones(m, 1) X];
+
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
+a2 = [ones(size(a2,1), 1) a2];
+
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
+hThetaX = a3;
+
+yVec = zeros(m,num_labels);
+
+for i = 1:m
+    yVec(i,y(i)) = 1;
+end
+
+% for i = 1:m
+%     
+%     term1 = -yVec(i,:) .* log(hThetaX(i,:));
+%     term2 = (ones(1,num_labels) - yVec(i,:)) .* log(ones(1,num_labels) - hThetaX(i,:));
+%     J = J + sum(term1 - term2);
+%     
+% end
+% 
+% J = J / m;
+
+J = 1/m * sum(sum(-1 * yVec .* log(hThetaX)-(1-yVec) .* log(1-hThetaX)));
+
+regularator = (sum(sum(Theta1(:,2:end).^2)) + sum(sum(Theta2(:,2:end).^2))) * (lambda/(2*m));
+
+J = J + regularator;
+
+#{
+X = [ones(m, 1) X];
+a1 = zeros(size(X,2),1);
+z2 = zeros(size(Theta1),1);
+a2 = zeros(size(Theta1),1);
+z3 = zeros(size(Theta2),1);
+a3 = zeros(size(Theta2),1);
+
+
+for i=1:m
+
+  a1 = X(i,:)';
+
+  z2 = Theta1 * a1;
+  a2 = sigmoid(z2);
+  a2 = a2'; %add bias
+  a2 = [1 a2];
+  a2 = a2';
+  
+  z3 = Theta2 * a2;
+  a3 = sigmoid(z3);
+ % [n p] = max(a3);
+  
+  yk = zeros(10,1);
+  yk(y(i)) = 1;
+  
+  J = J + ( sum(yk .* log(a3)) + sum((1-yk) .* log(1-a3)) );
+
+end
+J = (-1/m)*J;
+#}
+
+
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
@@ -61,19 +129,6 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
