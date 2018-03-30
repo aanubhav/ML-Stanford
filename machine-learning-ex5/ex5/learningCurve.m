@@ -23,14 +23,22 @@ error_val   = zeros(m, 1);
 
 
 for i = 1:m
-  param = trainLinearReg(X(1:i,:),y(1:i,:),lambda);
+  param = trainLinearReg(X(1:i,:),y(1:i),lambda);
   %jtrain = (1/(2*m))*sum((X * theta - y).^2);
-  J = linearRegCostFunction(X(1:i,:),y(1:i,:),param,0);
-  error_train(i) = J;
+  %J = linearRegCostFunction(X(1:i,:),y(1:i),param,0);
+  error_train(i) = linearRegCostFunction(X(1:i,:),y(1:i),param,0);;
   
-  error_val(i) = linearRegCostFunction(Xval,yval,param,lambda);
+  error_val(i) = linearRegCostFunction(Xval,yval,param,0);
   
   
+  
+   %X_sub = X(1:i, :);
+    %y_sub = y(1:i); 
+
+    %theta = trainLinearReg(X_sub, y_sub, lambda);
+
+   % error_train(i) = linearRegCostFunction(X_sub, y_sub, theta, 0);
+    %error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
   
   
   
