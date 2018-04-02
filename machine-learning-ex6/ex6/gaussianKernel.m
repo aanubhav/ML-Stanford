@@ -16,6 +16,9 @@ sim = 0;
 %
 %
 
+%sim = exp(-1*(sum((x1-x2).*(x1-x2)))/(2*sigma*sigma));
+
+sim = exp(-sum((x1-x2).^2)/(2*sigma^2));
 
 
 

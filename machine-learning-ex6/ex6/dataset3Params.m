@@ -24,7 +24,33 @@ sigma = 0.3;
 %
 
 
+%c = [0.01*C, 0.03*C, 0.1*C, 0.3*C, 1*C, 3*C, 10*C, 30*C];
 
+c = [0.01*C 0.03*C 0.1*C 0.3*C 1*C 3*C 10*C 30*C]';
+
+sig1 = [0.01*sigma 0.03*sigma 0.1*sigma 0.3*sigma 1*sigma 3*sigma 10*sigma 30*sigma]';
+
+x1 = [1 2 1]; x2 = [0 4 -1];
+row = 0;
+
+for i = 1 : length(c)
+  for j = 1 : length(sig1)
+  
+  row = row + 1;
+  model= svmTrain(X, y, c(i), @(x1, x2) gaussianKernel(x1, x2, sig1(j))); 
+  predictions = svmPredict(model, Xval);
+  error = mean(double(predictions ~= yval));
+  
+  results(row , :) = [ c(i) sig1(j) error ];   
+  
+  
+  end
+end  
+
+final_result = sortrows( results , 3);
+
+C = final_result(1,1);
+sigma = final_result(1,2);
 
 
 
