@@ -24,7 +24,7 @@ m = size(X);
 m = m(:,1);
 temp = zeros(K,1);
 for i = 1:m
-  %temp = [(X(i,1)-centroids (1,1))*(X(i,1)-centroids (1,1))+(X(i,2)-centroids (1,2))*(X(i,2)-centroids (1,2)) ; (X(i,1)-centroids (2,1))*(X(i,1)-centroids (2,1))+(X(i,2)-centroids (2,2))*(X(i,2)-centroids (2,2)) ; (X(i,1)-centroids (3,1))*(X(i,1)-centroids (3,1))+(X(i,2)-centroids (3,2))*(X(i,2)-centroids (3,2)) ];
+  
   for j = 1:K
     temp(j) = sum(power((X(i,:)-centroids(j,:)),2));
   [u,v] = min(temp);
@@ -34,7 +34,7 @@ for i = 1:m
 end
 
 
-
+%temp = [(X(i,1)-centroids (1,1))*(X(i,1)-centroids (1,1))+(X(i,2)-centroids (1,2))*(X(i,2)-centroids (1,2)) ; (X(i,1)-centroids (2,1))*(X(i,1)-centroids (2,1))+(X(i,2)-centroids (2,2))*(X(i,2)-centroids (2,2)) ; (X(i,1)-centroids (3,1))*(X(i,1)-centroids (3,1))+(X(i,2)-centroids (3,2))*(X(i,2)-centroids (3,2)) ];
 
 
 % =============================================================

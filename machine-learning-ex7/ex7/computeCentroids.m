@@ -17,6 +17,9 @@ function centroids = computeCentroids(X, idx, K)
 centroids = zeros(K, n);
 
 
+
+
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: Go over every centroid and compute mean of all points that
 %               belong to it. Concretely, the row vector centroids(i, :)
@@ -25,7 +28,14 @@ centroids = zeros(K, n);
 %
 % Note: You can use a for-loop over the centroids to compute this.
 %
+nc = sum(idx == 1);
+centroids(1,:) = 1/nc*(sum(X.*(idx==1)));
 
+nc = sum(idx == 2);
+centroids(2,:) = 1/nc*(sum(X.*(idx==2)));
+
+nc = sum(idx == 3);
+centroids(3,:) = 1/nc*(sum(X.*(idx==3)));
 
 
 
